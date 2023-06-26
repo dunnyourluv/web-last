@@ -1,0 +1,87 @@
+.button {
+    padding: 1.2rem 2.4rem;
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &.primary {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+        }
+    }
+
+    &.reverse {
+        background-color: var(--color-white);
+        color: var(--color-primary);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+    }
+
+    &.outline {
+        background-color: transparent;
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+    }
+
+    &.outlineGray {
+        background-color: transparent;
+        color: var(--color-gray-700);
+        border: 1px solid var(--color-gray);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            // background-color: var(--color-gray);
+            // color: var(--color-white);
+            border: 1px solid var(--color-gray-700);
+        }
+    }
+
+    &.transparent {
+        background-color: transparent;
+        color: var(--color-primary);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            color: var(--color-white);
+        }
+    }
+
+    &.transparentReverse {
+        background-color: transparent;
+        color: var(--color-white);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+
+    &.primaryBrightness {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        transition: all 0.2s ease-in-out;
+        position: relative;
+        overflow: hidden;
+        &:hover {
+            filter: brightness(1.2);
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+    }
+
+    span {
+        padding: 0 0.4rem;
+        font-weight: bold;
+
+    }
+}

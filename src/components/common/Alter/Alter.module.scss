@@ -1,0 +1,35 @@
+.alter {
+    padding: 2.4rem 1.6rem;
+    border: 0.1rem solid var(--color-gray);
+    border-radius: 0.4rem;
+
+    .icon {
+    }
+
+    .message {
+    }
+
+    &.error {
+        .icon {
+            color: red;
+        }
+    }
+
+    &.success {
+        .icon {
+            color: green;
+        }
+    }
+
+    &.warning {
+        .icon {
+            color: orange;
+        }
+    }
+
+    &.info {
+        .icon {
+            color: blue;
+        }
+    }
+}

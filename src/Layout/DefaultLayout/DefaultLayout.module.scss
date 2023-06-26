@@ -1,0 +1,16 @@
+.navbar {
+    &.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+}
+
+.content {
+    min-height: calc(100vh - 8.9rem);
+    &.fixed {
+        margin-top: 8.9rem;
+    }
+}

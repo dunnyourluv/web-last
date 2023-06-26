@@ -1,0 +1,66 @@
+.blogCard {
+    margin-bottom: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+    padding-bottom: 1rem;
+    .image {
+        position: relative;
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s ease-out;
+            z-index: 2;
+            transition: all 0.3s ease-out;
+        }
+        &:hover {
+            .overlay {
+                opacity: 1;
+            }
+        }
+    }
+
+    .content {
+        text-align: center;
+        padding: 2rem;
+        .title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 1.6rem;
+            display: block;
+        }
+
+        .description {
+            margin-bottom: 0.5rem;
+        }
+    }
+    .tag {
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        .icon {
+            color: var(--color-white);
+            font-size: 2.4rem;
+            display: block;
+            width: 4rem;
+            height: 4rem;
+            line-height: 4rem;
+            text-align: center;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+        }
+
+        .name {
+            padding-left: 1rem;
+        }
+    }
+}
+

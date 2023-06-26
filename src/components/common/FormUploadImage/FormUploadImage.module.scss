@@ -1,0 +1,60 @@
+.formUploadImage {
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+    .previewItem {
+        width: 10rem;
+        height: 10rem;
+        margin: 0.5rem;
+        position: relative;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .remove {
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+            background-color: var(--color-gray-100);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+                background-color: var(--color-gray-200);
+            }
+        }
+    }
+}
+
+.button {
+    border: 0.2rem dashed var(--color-gray);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    min-height: 14rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    flex-direction: column;
+    i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background-color: var(--color-gray-100);
+    }
+}
+
+.currentInput {
+    display: none;
+}

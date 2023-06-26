@@ -1,0 +1,53 @@
+.select {
+    position: relative;
+    display: flex;
+    padding: 1.4rem 1.6rem;
+    transition: all 0.3s ease;
+    user-select: none;
+    .label {
+        cursor: pointer;
+        flex: 1;
+    }
+
+    .logo {
+        margin-left: auto;
+        transition: all 0.3s ease;
+    }
+
+    .list {
+        z-index: 10;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-white);
+        border-top: 0.3rem solid var(--color-primary);
+        & > * {
+            padding: 1.4rem 0;
+            margin: 0 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    }
+
+    &.focus {
+        .logo {
+            transform: rotate(180deg);
+        }
+    }
+    &.bottom {
+        border-bottom: 0.2rem solid var(--color-gray);
+    }
+}
+
+.option {
+    border-bottom: 1px solid var(--color-gray);
+    transition: all 0.3s ease;
+    &.selected {
+        font-weight: bold;
+    }
+
+    &:hover {
+        font-weight: bold;
+    }
+}

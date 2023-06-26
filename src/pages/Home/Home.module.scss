@@ -1,0 +1,51 @@
+.home {
+}
+
+.head {
+    min-height: 100vh;
+    background: url(https://r4.wallpaperflare.com/wallpaper/1003/475/732/london-cityscape-building-big-ben-wallpaper-e8c61de8f0a01c48e0bc113e782244ba.jpg)
+        no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content {
+    }
+    .textContent {
+        text-align: center;
+        color: var(--color-white);
+        letter-spacing: 0.1rem;
+        h1 {
+            font-size: 4.8rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 2.4rem;
+            font-weight: 400;
+        }
+        margin-bottom: 4rem;
+    }
+
+    .searchForm {
+        background-color: var(--color-white);
+        border-radius: 0.4rem;
+        padding: 1.6rem;
+    }
+
+    & > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-black);
+        opacity: 0.4;
+        z-index: 0;
+    }
+}

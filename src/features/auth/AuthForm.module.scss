@@ -1,0 +1,60 @@
+.authForm {
+    height: 100%;
+}
+
+.content {
+    max-width: 40rem;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.error {
+    margin-bottom: 1.6rem;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    font-weight: bold;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.6rem;
+    .line {
+        height: 1px;
+        background-color: var(--color-gray);
+        flex-grow: 1;
+    }
+
+    p {
+        &:nth-child(2) {
+            margin: 0 1.6rem;
+        }
+    }
+}
+
+
+.form {
+    .formGroup {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .formItem {
+        margin-bottom: 1.6rem;
+        & > * {
+            width: 100%;
+        }
+    }
+
+    .formButtons {
+        button {
+            margin-bottom: 1.6rem;
+        
+        }
+
+    }
+}

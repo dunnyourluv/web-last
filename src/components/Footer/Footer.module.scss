@@ -1,0 +1,18 @@
+.footer {
+    background-color: var(--color-gray-900);
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    a {
+        color: #ffffff;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

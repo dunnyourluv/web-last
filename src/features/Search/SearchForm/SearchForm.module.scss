@@ -1,0 +1,58 @@
+.form {
+    .formGroup {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .formItem {
+        width: calc(100% / 4 - 1rem);
+        margin-right: 0.8rem;
+        margin-bottom: 0.8rem;
+        &:last-child {
+            margin-right: 0;
+        }
+        & > * {
+            width: 100%;
+        }
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .form {
+        .formItem {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 1.6rem;
+        }
+    }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .form {
+        .formItem {
+            width: calc(100% / 2 - 1rem);
+            margin-right: 0;
+        }
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .form {
+        .formItem {
+            width: calc(100% / 3 - 1rem);
+            margin-right: 0;
+        }
+    }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .form {
+        .formItem {
+            width: calc(100% / 4 - 1rem);
+            margin-right: 0;
+        }
+    }
+}
