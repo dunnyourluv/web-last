@@ -43,6 +43,7 @@
 
             .auth {
                 font-size: 1.4rem;
+                display: flex;
                 i {
                     padding: 0 0.8rem;
                 }
@@ -63,7 +64,32 @@
         }
     }
 }
+
+.logout {
+    cursor: pointer;
+    position: relative;
+    .model {
+        padding: 1rem;
+        background-color: var(--color-white);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        min-width: 18rem;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+        &.open {
+            visibility: visible;
+            opacity: 1;
+            z-index: 10;
+        }
+    }
+}
+
 .searchResults {
+    overflow: auto;
     border-top: 0.4rem solid var(--color-primary);
     padding: 1.6rem 1.2rem;
     position: absolute;
@@ -337,6 +363,11 @@ input::placeholder {
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+    .logout {
+        .model {
+            transform: translateY(2rem) translateX(-2rem);
+        }
+    }
     .bar {
         display: none;
     }

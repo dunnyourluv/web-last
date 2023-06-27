@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import SearchForm from "../../features/Search/SearchForm/SearchForm";
 import styles from "./Home.module.scss";
+import useTitle from "../../hooks/useTitle";
 
 const Head = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     return (
         <div className={styles.head}>
             <div className={styles.overlay}></div>
@@ -14,9 +15,11 @@ const Head = () => {
                         <h3>Tìm đồ thất lạc của bạn ở bất cứ nơi đâu</h3>
                     </div>
                     <div className={styles.searchForm}>
-                        <SearchForm  onClick={(data) => {
-                            navigate("/search", {state: data})
-                        }} />
+                        <SearchForm
+                            onClick={(data) => {
+                                navigate("/search", { state: data });
+                            }}
+                        />
                     </div>
                 </div>
             </div>
@@ -25,6 +28,7 @@ const Head = () => {
 };
 
 const Home: React.FC = () => {
+    useTitle("Home");
     return (
         <div className={styles.home}>
             <Head />

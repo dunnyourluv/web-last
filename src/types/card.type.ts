@@ -7,5 +7,5 @@ export interface CardType {
     description: string;
     images: string[];
     location: string;
-    type: "none" | "VB" | "GT" | "CMND" | "TSV";
+    type: string;
 }

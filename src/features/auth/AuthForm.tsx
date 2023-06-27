@@ -11,18 +11,20 @@ interface AuthFormProps {
     type?: "login" | "register";
     onLoginSubmit?: (data: LoginUser) => void;
     onRegisterSubmit?: (data: RegisterUser) => void;
+    error?: string;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
     type = "login",
     onRegisterSubmit,
     onLoginSubmit,
+    error: initError,
 }) => {
     const loginError = useSelector(
         (state: RootState) => state.auth.login.error,
     );
 
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<string>(initError || "");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -30,7 +32,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
     const [fullName, setFullName] = useState<string>("");
 
     useEffect(() => {
-        setError(loginError || "");
+        setError(loginError || initError || "");
     }, [loginError]);
 
     const handlerLoginSubmit = () => {

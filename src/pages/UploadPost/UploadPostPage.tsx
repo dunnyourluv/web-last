@@ -5,10 +5,12 @@ import { addCard, addCardSuccess } from "../../app/produceSlice";
 import { v4 } from "uuid";
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 interface UploadPostPageProps {}
 
 const UploadPostPage: React.FC<UploadPostPageProps> = () => {
+    useTitle("Upload")
     const user = useSelector((state: RootState) => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,7 +31,12 @@ const UploadPostPage: React.FC<UploadPostPageProps> = () => {
                                     images: data.images.map((img) =>
                                         URL.createObjectURL(img),
                                     ),
-                                    type: "none",
+                                    type: data.type as
+                                        | "none"
+                                        | "VB"
+                                        | "GT"
+                                        | "CMND"
+                                        | "TSV",
                                     user: user,
                                 }),
                             );

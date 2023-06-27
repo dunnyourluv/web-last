@@ -39,7 +39,9 @@ const Input: React.FC<InputProps> = ({
 }) => {
     const [focus, setFocus] = useState(false);
     const [labelFocus, setLabelFocus] = useState(false);
-    const [value, setValue] = useState<string>(props.value ? props.value + "" : "");
+    const [value, setValue] = useState<string>(
+        props.value ? props.value + "" : "",
+    );
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     let currentClassName = [styles.input];

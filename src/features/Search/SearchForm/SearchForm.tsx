@@ -3,6 +3,7 @@ import Button from "../../../components/common/Button/Button";
 import Input from "../../../components/common/Input/Input";
 import styles from "./SearchForm.module.scss";
 import SelectType from "../../../components/common/SelectType/SelectType";
+import SelectLocation from "../../../components/SelectLocation/SelectionLocation";
 
 interface SearchFormProps {
     onClick?: (value: {
@@ -31,12 +32,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onClick }) => {
                     <SelectType onChange={setType} />
                 </li>
                 <li className={styles.formItem}>
-                    <Input
-                        type="text"
-                        label="Vị trí"
-                        border="bottom"
-                        onValueChange={setLocation}
-                    />
+                    <SelectLocation onChange={setLocation} />
                 </li>
                 <li className={styles.formItem}>
                     <Button

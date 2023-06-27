@@ -1,11 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { CardType } from "../../types/card.type";
 import styles from "./Detail.module.scss";
-import { useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
 import Button from "../../components/common/Button/Button";
 import Card from "../../components/common/Card/Card";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import NotFound from "../404/NotFound";
+import useTitle from "../../hooks/useTitle";
 interface DetailProps {}
 
 const DetailContext = createContext<{
@@ -121,13 +123,23 @@ const Description = () => {
 
 const Detail: React.FC<DetailProps> = () => {
     const { id } = useParams<{ id: string }>();
+    const { pathname } = useLocation();
     const card = useSelector((state: RootState) => state.produce.cards).find(
         (card) => card.id === id,
     );
 
     const cardSuggestions = useSelector(
         (state: RootState) => state.produce.cards,
-    ).slice(0, 6).filter(card => card.id !== id);
+    )
+        .slice(0, 6)
+        .filter((card) => card.id !== id);
+
+    if (!card) return <NotFound />;
+    useTitle(card.title);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     return (
         <DetailContext.Provider value={{ card }}>
@@ -158,8 +170,14 @@ const Detail: React.FC<DetailProps> = () => {
                                 <h1>Một số gợi ý cho bạn</h1>
                                 {cardSuggestions.map((card) => {
                                     return (
-                                        <div className={styles.item}>
-                                            <Card data={card} to={"/detail/" + card.id} />
+                                        <div
+                                            className={styles.item}
+                                            key={card.id}
+                                        >
+                                            <Card
+                                                data={card}
+                                                to={"/detail/" + card.id}
+                                            />
                                         </div>
                                     );
                                 })}

@@ -1,7 +1,6 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import Card from "../../components/common/Card/Card";
 import Input from "../../components/common/Input/Input";
-import Select from "../../components/common/Select/Select";
 import styles from "./SearchPage.module.scss";
 import Button from "../../components/common/Button/Button";
 import { useSelector } from "react-redux";
@@ -9,6 +8,8 @@ import { RootState } from "../../app/store";
 import { useLocation } from "react-router-dom";
 import { CardType } from "../../types/card.type";
 import SelectType from "../../components/common/SelectType/SelectType";
+import useTitle from "../../hooks/useTitle";
+import SelectLocation from "../../components/SelectLocation/SelectionLocation";
 
 interface SearchPageProps {}
 
@@ -25,7 +26,6 @@ const SearchFilter = () => {
     const [location, setLocation] = useState(state?.location || "");
     const [keyword, setKeyword] = useState(state?.keyword || "");
     const [sort, setSort] = useState("none");
-
     const handlerFilterBtnClick = () => {
         setShowFilter(!showFilter);
     };
@@ -34,8 +34,10 @@ const SearchFilter = () => {
         const cardList = cards.filter((card) => {
             const typeFilter = type === "none" || card.type === type;
             const locationFilter =
-                location === "" || card.location.includes(location);
-            const keywordFilter = card.title.includes(keyword);
+                location === "none" || card.location.includes(location);
+            const keywordFilter = card.title
+                .toLowerCase()
+                .includes(keyword?.toLowerCase());
             return typeFilter && locationFilter && keywordFilter;
         });
         setCardList && setCardList(cardList);
@@ -72,12 +74,7 @@ const SearchFilter = () => {
                         <SelectType option={type} onChange={setType} />
                     </div>
                     <div className={styles.optionItem}>
-                        <Input
-                            value={location}
-                            label="Tìm ở?"
-                            border="bottom"
-                            onChange={(e) => setLocation(e.target.value)}
-                        />
+                        <SelectLocation onChange={setLocation} />
                     </div>
                     {/* <div className={styles.optionItem}>
                         <SelectType option={sort} onChange={setType} />
@@ -113,24 +110,40 @@ const SearchFilter = () => {
 };
 
 const SearchPage: React.FC<SearchPageProps> = ({}) => {
+    useTitle("Search");
     const { state } = useLocation();
+    console.log(state);
     const cards = useSelector((state: RootState) => state.produce.cards).filter(
         (card) => {
-            const type = card.type.toLowerCase() || "";
-            const location = card.location.toLowerCase() || "";
-            const keyword = card.title.toLowerCase() || "";
-            const typeFilter = type === state?.type.toLowerCase() || ""; // state.type === "none" ||
-            const locationFilter =
-                state?.location === "" ||
-                location.includes(state?.location.toLowerCase());
-            const keywordFilter = keyword.includes(
-                state?.keyword.toLowerCase() || "",
-            );
-            return typeFilter && locationFilter && keywordFilter;
+            if (!state) return true;
+            const isType =
+                state.type == "none" ? true : state.type == card.type;
+            const isLocation =
+                state.location != "none"
+                    ? card.location
+                          .toLowerCase()
+                          .includes(state.location.toLowerCase())
+                    : true;
+            const isKeyword =
+                state.keyword != ""
+                    ? card.title
+                          .toLowerCase()
+                          .includes(state.keyword.toLowerCase())
+                    : true;
+            return isType && isLocation && isKeyword;
         },
     );
 
     const [cardList, setCardList] = useState(cards);
+    const [visibleCards, setVisibleCards] = useState(6);
+
+    const loadMoreBtnClickHandler = () => {
+        setVisibleCards((prev) => prev + 6);
+    };
+
+    useEffect(() => {
+        setVisibleCards(6);
+    }, [cardList]);
 
     return (
         <SearchContext.Provider value={{ setCardList }}>
@@ -139,7 +152,7 @@ const SearchPage: React.FC<SearchPageProps> = ({}) => {
                     <SearchFilter />
                     <div className={`wrapper ${styles.listContainer}`}>
                         <ul className={styles.searchList}>
-                            {cardList.map((card) => {
+                            {cardList.slice(0, visibleCards).map((card) => {
                                 return (
                                     <div className={styles.item} key={card.id}>
                                         <Card
@@ -156,6 +169,17 @@ const SearchPage: React.FC<SearchPageProps> = ({}) => {
                                 </h3>
                             )}
                         </ul>
+                        {visibleCards <= cardList.length && (
+                            <div className={styles.loadBtn}>
+                                <Button
+                                    onClick={loadMoreBtnClickHandler}
+                                    type="primary-brightness"
+                                    className={styles.innerLoadBtn}
+                                >
+                                    Xem thêm
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

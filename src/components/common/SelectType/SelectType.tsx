@@ -1,4 +1,6 @@
+import { useSelector } from "react-redux";
 import Select from "../Select/Select";
+import { RootState } from "../../../app/store";
 
 interface SelectTypeProps {
     onChange?: (value: string) => void;
@@ -6,33 +8,14 @@ interface SelectTypeProps {
 }
 
 const SelectType = (props: SelectTypeProps) => {
+    const options = useSelector((state: RootState) => state.produce.types);
+
     return (
         <Select
             option={props.option}
             onChange={props.onChange}
             border="bottom"
-            options={[
-                {
-                    label: "Loại?",
-                    value: "none",
-                },
-                {
-                    label: "Ví/Bóp",
-                    value: "VB",
-                },
-                {
-                    label: "Giấy Tờ",
-                    value: "GT",
-                },
-                {
-                    label: "Chứng minh nhân dân",
-                    value: "CMND",
-                },
-                {
-                    label: "Thẻ sinh viên",
-                    value: "TSV",
-                },
-            ]}
+            options={options || []}
         />
     );
 };

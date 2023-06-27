@@ -8,7 +8,16 @@ interface ProtectRouteProps {
 
 const ProtectRoute: React.FC<ProtectRouteProps> = ({ children }) => {
     const user = useSelector((state: RootState) => state.auth.user);
-    return user ? children : <Navigate to={"/login"} />;
+    return user ? (
+        children
+    ) : (
+        <Navigate
+            to={"/login"}
+            state={{
+                message: "Bạn cần đăng nhập để tiếp tục!",
+            }}
+        />
+    );
 };
 
 export default ProtectRoute;

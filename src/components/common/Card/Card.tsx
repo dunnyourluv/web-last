@@ -87,7 +87,11 @@ const Card: React.FC<CardProps> = ({ data, to }) => {
                     <span>{data.title}</span>
                 </div>
                 <div className={styles.description}>
-                    <span>{data.description}</span>
+                    <span>
+                        {data.description.length > 50
+                            ? data.description.slice(0, 50) + "..."
+                            : data.description}
+                    </span>
                 </div>
                 <div className={styles.userInfo}>
                     <div className={styles.phone}>

@@ -1,13 +1,14 @@
 import styles from "./Navbar.module.scss";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../common/Input/Input";
 import Button from "../common/Button/Button";
 import { useState, createContext, useContext, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { User } from "../../types/auth.type";
 import { CardType } from "../../types/card.type";
+import { logout } from "../../features/auth/authSlice";
 interface NavbarProps {
     className?: string;
     transparent?: boolean;
@@ -21,21 +22,59 @@ const NavbarContent = createContext<{
     user: null,
 });
 
+const Logout = (user: User) => {
+    const [openModel, setOpenModel] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    return (
+        <div className={styles.logout}>
+            <p
+                onClick={() => {
+                    setOpenModel(!openModel);
+                }}
+            >
+                {user.name}
+            </p>
+            <div
+                className={`${styles.model} ${openModel ? styles.open : ""}`}
+                onClick={() => {
+                    dispatch(logout());
+                    navigate("/login");
+                }}
+            >
+                <Button type="outline">Đăng xuất</Button>
+            </div>
+        </div>
+    );
+};
+
 const SearchResult: React.FC<{
     className?: string;
     results: CardType[];
 }> = ({ results }) => {
+    const { setSearchValue } = useContext(NavbarContent);
+
+    if (!setSearchValue) throw new Error("Missing search value context");
+
+    const handlerClick = () => {
+        setSearchValue("");
+    };
+
     return (
         <ul className={styles.searchResults}>
             {results.map((card, index) => {
                 return (
                     <li className={styles.searchResultItem} key={index}>
-                        <Link to={`/detail/${card.id}`}>{card.title}</Link>
+                        <Link to={`/detail/${card.id}`} onClick={handlerClick}>
+                            {card.title}
+                        </Link>
                     </li>
                 );
             })}
             <div className={styles.viewAllBtn}>
-                <Link to={"/search"}>Xem tất cả</Link>
+                <Link to={"/search"} onClick={handlerClick}>
+                    Xem tất cả
+                </Link>
             </div>
         </ul>
     );
@@ -91,7 +130,7 @@ const MobileMenu: React.FC<{
                 <div className={styles.auth}>
                     <i className="fa-solid fa-user"></i>
                     {user ? (
-                        user.name
+                        <Logout {...user} />
                     ) : (
                         <>
                             <Link to={"/login"}>Đăng nhập</Link>
@@ -128,6 +167,11 @@ const Navbar: React.FC<NavbarProps> = ({ className, transparent }) => {
 
     useEffect(() => {
         handlerSearch(searchValue);
+        if (searchValue.length > 0) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
     }, [searchValue]);
 
     return (
@@ -189,7 +233,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, transparent }) => {
                         <div className={styles.auth}>
                             <i className="fa-solid fa-user"></i>
                             {user ? (
-                                <span className={styles.user}>{user.name}</span>
+                                <Logout {...user} />
                             ) : (
                                 <>
                                     <Link to={"/login"}>Đăng nhập</Link>

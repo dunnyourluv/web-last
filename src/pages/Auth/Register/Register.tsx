@@ -4,9 +4,11 @@ import styles from "./Register.module.scss";
 import { v4 as uuidv4 } from "uuid";
 import { registerSuccess } from "../../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = ({}) => {
+    useTitle("Register");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return (

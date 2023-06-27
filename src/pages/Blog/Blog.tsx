@@ -1,3 +1,4 @@
+import useTitle from "../../hooks/useTitle";
 import styles from "./Blog.module.scss";
 import BlogCard from "./BlogCard/BlogCard";
 
@@ -16,6 +17,7 @@ const data = {
 };
 
 const Blog: React.FC<BlogProps> = ({}) => {
+    useTitle("Blogs")
     return (
         <div className={styles.blog}>
             <div className="wrapper">
